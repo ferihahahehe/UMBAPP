@@ -8,6 +8,7 @@ import 'package:flutter_web_plugins/url_strategy.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
 import 'flutter_flow/nav/nav.dart';
@@ -110,7 +111,7 @@ class NavBarPage extends StatefulWidget {
 
 /// This is the private State class that goes with NavBarPage.
 class _NavBarPageState extends State<NavBarPage> {
-  String _currentPageName = 'Dashboard';
+  String _currentPageName = 'HomePage';
   late Widget? _currentPage;
 
   @override
@@ -123,8 +124,9 @@ class _NavBarPageState extends State<NavBarPage> {
   @override
   Widget build(BuildContext context) {
     final tabs = {
-      'Dashboard': DashboardWidget(),
       'HomePage': HomePageWidget(),
+      'Dashboard': DashboardWidget(),
+      'MyJourney': MyJourneyWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -160,14 +162,14 @@ class _NavBarPageState extends State<NavBarPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.bubble_chart,
+                  Icons.settings_bluetooth_rounded,
                   color: currentIndex == 0
                       ? FlutterFlowTheme.of(context).primary
                       : Color(0x8A000000),
                   size: 24.0,
                 ),
                 Text(
-                  'Dashboard',
+                  'BLE Settings',
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: currentIndex == 0
@@ -184,17 +186,41 @@ class _NavBarPageState extends State<NavBarPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.settings_bluetooth_rounded,
+                  Icons.bubble_chart,
                   color: currentIndex == 1
                       ? FlutterFlowTheme.of(context).primary
                       : Color(0x8A000000),
                   size: 24.0,
                 ),
                 Text(
-                  'BLE Settings',
+                  'Dashboard',
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: currentIndex == 1
+                        ? FlutterFlowTheme.of(context).primary
+                        : Color(0x8A000000),
+                    fontSize: 11.0,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          FloatingNavbarItem(
+            customWidget: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  FontAwesomeIcons.chartLine,
+                  color: currentIndex == 2
+                      ? FlutterFlowTheme.of(context).primary
+                      : Color(0x8A000000),
+                  size: 24.0,
+                ),
+                Text(
+                  'My Journey',
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    color: currentIndex == 2
                         ? FlutterFlowTheme.of(context).primary
                         : Color(0x8A000000),
                     fontSize: 11.0,
