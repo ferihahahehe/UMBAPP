@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'current_activity_model.dart';
@@ -101,19 +102,19 @@ class _CurrentActivityWidgetState extends State<CurrentActivityWidget> {
                   if (FFAppState().currentActivityName == 'Stairs Up')
                     Align(
                       alignment: AlignmentDirectional(0.0, 0.0),
-                      child: Icon(
-                        Icons.directions_walk,
+                      child: FaIcon(
+                        FontAwesomeIcons.angleDoubleUp,
                         color: FlutterFlowTheme.of(context).primaryText,
-                        size: 32.0,
+                        size: 26.0,
                       ),
                     ),
                   if (FFAppState().currentActivityName == 'Stairs Down')
                     Align(
                       alignment: AlignmentDirectional(0.0, 0.0),
-                      child: Icon(
-                        Icons.directions_walk,
+                      child: FaIcon(
+                        FontAwesomeIcons.angleDoubleDown,
                         color: FlutterFlowTheme.of(context).primaryText,
-                        size: 32.0,
+                        size: 26.0,
                       ),
                     ),
                   if (FFAppState().currentActivityName == 'Unknown')

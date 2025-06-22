@@ -772,8 +772,6 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                     FFAppState()
                                                                         .addToCurrentDevices(
                                                                             displayDevicesItem);
-                                                                    safeSetState(
-                                                                        () {});
                                                                   }
                                                                   FFAppState()
                                                                           .currentDevice =
@@ -781,8 +779,6 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                   FFAppState()
                                                                           .isDeviceConnected =
                                                                       true;
-                                                                  safeSetState(
-                                                                      () {});
 
                                                                   context.pushNamed(
                                                                       DevicePageWidget

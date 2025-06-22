@@ -7,8 +7,6 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-// Set your action name, define your arguments and return parameter,
-// and then add the boilerplate code using the green button on the right!
 // File: lib/custom_code/actions/process_and_aggregate_data_batch.dart
 
 Future<void> processAndAggregateDataBatch(String rawData) async {
@@ -17,10 +15,58 @@ Future<void> processAndAggregateDataBatch(String rawData) async {
     return;
   }
 
-  // Map sementara untuk mengagregasi durasi dari batch yang baru diterima
-  Map<String, Map<String, double>> newDurationsMap = {};
-
   final logStrings = rawData.split(';').where((s) => s.isNotEmpty).toList();
+
+  // --- [AWAL] KODE TAMBAHAN UNTUK UPDATE REAL-TIME ---
+  if (logStrings.isNotEmpty) {
+    // Ambil data paling terakhir dari stream untuk update UI real-time
+    final lastLog = logStrings.last;
+    final parts = lastLog.split(',');
+
+    if (parts.length == 4) {
+      try {
+        final activityCode = int.parse(parts[0].trim());
+        final flexAngle = int.parse(parts[1].trim());
+        final conditionCode = int.parse(parts[2].trim());
+
+        String activityName;
+        switch (activityCode) {
+          case 1:
+            activityName = 'Idle';
+            break;
+          case 2:
+            activityName = 'Walking';
+            break;
+          case 3:
+            activityName = 'Running';
+            break;
+          case 4:
+            activityName = 'Stairs Up';
+            break;
+          case 5:
+            activityName = 'Stairs Down';
+            break;
+          default:
+            activityName = 'Unknown';
+        }
+
+        final isGoodCondition = (conditionCode == 1);
+
+        // Update state variables untuk UI real-time
+        FFAppState().update(() {
+          FFAppState().currentActivityName = activityName;
+          FFAppState().currentFlexAngle = flexAngle;
+          FFAppState().currentCondition = isGoodCondition;
+        });
+      } catch (e) {
+        print('Gagal mem-parsing data real-time: $lastLog. Error: $e');
+      }
+    }
+  }
+  // --- [AKHIR] KODE TAMBAHAN UNTUK UPDATE REAL-TIME ---
+
+  // Logika yang sudah ada untuk agregasi durasi (dipertahankan)
+  Map<String, Map<String, double>> newDurationsMap = {};
 
   for (final log in logStrings) {
     final parts = log.split(',');

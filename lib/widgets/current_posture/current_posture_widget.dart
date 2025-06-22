@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'current_posture_model.dart';
@@ -74,8 +75,8 @@ class _CurrentPostureWidgetState extends State<CurrentPostureWidget> {
                   if (!FFAppState().currentCondition)
                     Align(
                       alignment: AlignmentDirectional(0.0, 0.0),
-                      child: Icon(
-                        Icons.sentiment_very_dissatisfied_rounded,
+                      child: FaIcon(
+                        FontAwesomeIcons.frownOpen,
                         color: FlutterFlowTheme.of(context).primaryText,
                         size: 32.0,
                       ),
@@ -83,8 +84,8 @@ class _CurrentPostureWidgetState extends State<CurrentPostureWidget> {
                   if (FFAppState().currentCondition)
                     Align(
                       alignment: AlignmentDirectional(0.0, 0.0),
-                      child: Icon(
-                        Icons.sentiment_very_satisfied_sharp,
+                      child: FaIcon(
+                        FontAwesomeIcons.grin,
                         color: FlutterFlowTheme.of(context).primaryText,
                         size: 32.0,
                       ),
