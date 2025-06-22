@@ -14,16 +14,24 @@ import 'dart:async';
 class GlobalTimerManager {
   static Timer? _globalTimer;
   static void start(Future<void> Function() onTick) {
+    // Jangan mulai timer baru jika sudah aktif.
     if (_globalTimer?.isActive ?? false) return;
+
+    // Jalankan tugas sekali saat pertama kali dipanggil.
+    onTick();
+
+    // Kemudian jalankan setiap 60 detik.
     _globalTimer = Timer.periodic(Duration(seconds: 60), (timer) => onTick());
   }
 }
 
 Future<void> startGlobalDataProcessor() async {
   GlobalTimerManager.start(() async {
+    // Secara periodik, periksa apakah hari sudah berganti untuk mengarsipkan data.
     await processAndStoreDailyHistory();
-    List<ActivityDurationStruct> todayDurations =
-        await calculateDurationsFromLogs(FFAppState().postureLogs);
-    FFAppState().globalActivityDurations = todayDurations;
+
+    // Perhitungan durasi harian (globalActivityDurations) sudah ditangani secara
+    // real-time oleh `processAndAggregateDataBatch`.
+    // Tidak perlu menjalankannya lagi di sini.
   });
 }

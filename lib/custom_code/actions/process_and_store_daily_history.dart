@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-// PERBAIKAN: Import yang benar untuk package intl
+// ignore_for_file: unnecessary_getters_setters
 import 'package:intl/intl.dart';
 
 Future<void> processAndStoreDailyHistory() async {
@@ -15,49 +15,33 @@ Future<void> processAndStoreDailyHistory() async {
   final todayString = DateFormat('yyyy-MM-dd').format(now);
   final lastDateString = FFAppState().lastProcessingDate;
 
-  // Hanya jalankan jika hari telah berganti
-  if (lastDateString.isNotEmpty && lastDateString != todayString) {
+  // Hanya jalankan jika hari telah berganti dan ada data untuk diarsipkan.
+  if (lastDateString.isNotEmpty &&
+      lastDateString != todayString &&
+      FFAppState().globalActivityDurations.isNotEmpty) {
     print('New day detected. Archiving data for $lastDateString.');
 
     final lastDate = DateFormat('yyyy-MM-dd').parse(lastDateString);
-    final allLogs = FFAppState().postureLogs;
 
-    // 1. Ambil semua log dari HARI SEBELUMNYA (berdasarkan lastProcessingDate)
-    final logsToProcess = allLogs
-        .where((log) =>
-            log.timestamp != null &&
-            log.timestamp!.year == lastDate.year &&
-            log.timestamp!.month == lastDate.month &&
-            log.timestamp!.day == lastDate.day)
-        .toList();
+    // Data di globalActivityDurations adalah ringkasan final untuk hari kemarin.
+    final finalDaySummary = FFAppState().globalActivityDurations.toList();
 
-    if (logsToProcess.isNotEmpty) {
-      // 2. Hitung ringkasan final untuk hari tersebut menggunakan action lain
-      List<ActivityDurationStruct> finalDaySummary =
-          await calculateDurationsFromLogs(logsToProcess);
+    // Buat objek riwayat baru.
+    final dailyHistoryEntry = DailyActivitySummaryStruct(
+      date: lastDate,
+      activityDurations: finalDaySummary,
+    );
 
-      // 3. Buat objek riwayat baru
-      final dailyHistoryEntry = DailyActivitySummaryStruct(
-        date: lastDate,
-        activityDurations: finalDaySummary,
-      );
+    // Simpan ke dalam daftar arsip permanen.
+    FFAppState().addToHistoricalSummaries(dailyHistoryEntry);
 
-      // 4. Simpan ke dalam daftar arsip permanen
-      FFAppState().addToHistoricalSummaries(dailyHistoryEntry);
-    }
+    // Kosongkan data durasi untuk hari yang baru.
+    FFAppState().globalActivityDurations = [];
 
-    // 5. Bersihkan data mentah, sisakan HANYA data HARI INI
-    final startOfToday = DateTime(now.year, now.month, now.day);
-    final logsFromToday = allLogs
-        .where((log) =>
-            log.timestamp != null && !log.timestamp!.isBefore(startOfToday))
-        .toList();
-    FFAppState().postureLogs = logsFromToday;
-
-    // 6. Update tanggal pemrosesan terakhir ke hari ini
+    // Update tanggal pemrosesan terakhir ke hari ini.
     FFAppState().lastProcessingDate = todayString;
   } else if (lastDateString.isEmpty) {
-    // Jika ini adalah pertama kalinya aplikasi berjalan, set tanggalnya saja
+    // Jika ini adalah pertama kalinya aplikasi berjalan, set tanggalnya saja.
     FFAppState().lastProcessingDate = todayString;
   }
 }

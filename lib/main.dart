@@ -111,7 +111,7 @@ class NavBarPage extends StatefulWidget {
 
 /// This is the private State class that goes with NavBarPage.
 class _NavBarPageState extends State<NavBarPage> {
-  String _currentPageName = 'HomePage';
+  String _currentPageName = 'Dashboard';
   late Widget? _currentPage;
 
   @override
@@ -124,9 +124,9 @@ class _NavBarPageState extends State<NavBarPage> {
   @override
   Widget build(BuildContext context) {
     final tabs = {
-      'HomePage': HomePageWidget(),
       'Dashboard': DashboardWidget(),
       'MyJourney': MyJourneyWidget(),
+      'HomePage': HomePageWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -162,14 +162,14 @@ class _NavBarPageState extends State<NavBarPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.settings_bluetooth_rounded,
+                  Icons.bubble_chart,
                   color: currentIndex == 0
                       ? FlutterFlowTheme.of(context).primary
                       : Color(0x8A000000),
                   size: 24.0,
                 ),
                 Text(
-                  'BLE Settings',
+                  'Dashboard',
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: currentIndex == 0
@@ -186,14 +186,14 @@ class _NavBarPageState extends State<NavBarPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.bubble_chart,
+                  FontAwesomeIcons.chartLine,
                   color: currentIndex == 1
                       ? FlutterFlowTheme.of(context).primary
                       : Color(0x8A000000),
                   size: 24.0,
                 ),
                 Text(
-                  'Dashboard',
+                  'My Journey',
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: currentIndex == 1
@@ -210,14 +210,14 @@ class _NavBarPageState extends State<NavBarPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  FontAwesomeIcons.chartLine,
+                  Icons.settings_bluetooth_rounded,
                   color: currentIndex == 2
                       ? FlutterFlowTheme.of(context).primary
                       : Color(0x8A000000),
                   size: 24.0,
                 ),
                 Text(
-                  'My Journey',
+                  'BLE Settings',
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: currentIndex == 2
