@@ -37,8 +37,10 @@ class _MyJourneyWidgetState extends State<MyJourneyWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await actions.archiveDataIfNeeded();
       _model.journeyDataOutput = await actions.prepareJourneyData(
         FFAppState().historicalSummaries.toList(),
+        FFAppState().globalActivityDurations.toList(),
       );
       _model.journeyData = _model.journeyDataOutput;
       safeSetState(() {});

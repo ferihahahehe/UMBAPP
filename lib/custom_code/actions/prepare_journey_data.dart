@@ -7,14 +7,15 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-// Set your action name, define your arguments and return parameter,
-// and then add the boilerplate code using the green button on the right!
+import 'index.dart'; // Imports other custom actions
+
 import 'dart:math';
 import 'package:intl/intl.dart';
 
 Future<JourneyPageDataStruct> prepareJourneyData(
-    List<DailyActivitySummaryStruct> allSummaries) async {
-  // Initialize the result structure
+  List<DailyActivitySummaryStruct> allSummaries,
+  List<ActivityDurationStruct> todaySummary, // Argumen baru
+) async {
   final result = JourneyPageDataStruct(
     dayLabels: [],
     idleGood: [],
@@ -55,22 +56,28 @@ Future<JourneyPageDataStruct> prepareJourneyData(
         DateTime(now.year, now.month, now.day).subtract(Duration(days: i));
     result.dayLabels.add(DateFormat('EEE').format(targetDate)); // e.g., 'Mon'
 
-    // Find the summary for the target date
-    final dailySummary = allSummaries.firstWhere(
-      (s) =>
-          s.hasDate() &&
-          s.date!.year == targetDate.year &&
-          s.date!.month == targetDate.month &&
-          s.date!.day == targetDate.day,
-      orElse: () =>
-          DailyActivitySummaryStruct(), // Return an empty struct if not found
-    );
+    List<ActivityDurationStruct> dailyActivities;
+
+    // Jika i == 0, berarti ini adalah hari ini. Ambil data dari 'todaySummary'.
+    if (i == 0) {
+      dailyActivities = todaySummary;
+    } else {
+      // Jika bukan hari ini, cari data di riwayat 'allSummaries'.
+      final dailySummary = allSummaries.firstWhere(
+        (s) =>
+            s.hasDate() &&
+            s.date!.year == targetDate.year &&
+            s.date!.month == targetDate.month &&
+            s.date!.day == targetDate.day,
+        orElse: () => DailyActivitySummaryStruct(),
+      );
+      dailyActivities = dailySummary.activityDurations;
+    }
 
     for (var activityName in activityNames) {
-      final activityData = dailySummary.activityDurations.firstWhere(
+      final activityData = dailyActivities.firstWhere(
         (ad) => ad.activityName == activityName,
-        orElse: () =>
-            ActivityDurationStruct(), // Return empty if activity not found for that day
+        orElse: () => ActivityDurationStruct(),
       );
 
       final goodDuration = activityData.goodDuration;

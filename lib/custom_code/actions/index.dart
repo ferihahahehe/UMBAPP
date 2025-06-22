@@ -17,3 +17,4 @@ export 'process_and_aggregate_data_batch.dart'
     show processAndAggregateDataBatch;
 export 'prepare_journey_data.dart' show prepareJourneyData;
 export 'start_all_device_listeners.dart' show startAllDeviceListeners;
+export 'archive_data_if_needed.dart' show archiveDataIfNeeded;
