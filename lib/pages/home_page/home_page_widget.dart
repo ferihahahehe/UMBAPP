@@ -244,661 +244,694 @@ class _HomePageWidgetState extends State<HomePageWidget>
                     if (FFAppState().isBluetoothEnabled)
                       Stack(
                         children: [
-                          SingleChildScrollView(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                SingleChildScrollView(
-                                  primary: false,
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 10.0, 0.0, 0.0),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Expanded(
-                                              child: Text(
-                                                'Connected Devices',
-                                                style: FlutterFlowTheme.of(
-                                                        context)
-                                                    .bodyLarge
-                                                    .override(
-                                                      font: GoogleFonts.roboto(
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyLarge
-                                                                .fontStyle,
-                                                      ),
-                                                      letterSpacing: 0.0,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyLarge
-                                                              .fontStyle,
-                                                    ),
-                                              ),
-                                            ),
-                                            if (FFAppState()
-                                                .isFetchingConnectedDevices)
-                                              Text(
-                                                'Finding...',
-                                                style: FlutterFlowTheme.of(
-                                                        context)
-                                                    .bodySmall
-                                                    .override(
-                                                      font: GoogleFonts.roboto(
-                                                        fontWeight:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodySmall
-                                                                .fontWeight,
-                                                        fontStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodySmall
-                                                                .fontStyle,
-                                                      ),
-                                                      letterSpacing: 0.0,
-                                                      fontWeight:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodySmall
-                                                              .fontWeight,
-                                                      fontStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodySmall
-                                                              .fontStyle,
-                                                    ),
-                                              ).animateOnPageLoad(animationsMap[
-                                                  'textOnPageLoadAnimation1']!),
-                                          ],
-                                        ),
+                          ScrollConfiguration(
+                            behavior: ScrollConfiguration.of(context).copyWith(
+                              scrollbars: false,
+                              dragDevices: {
+                                PointerDeviceKind.mouse,
+                                PointerDeviceKind.touch,
+                                PointerDeviceKind.stylus,
+                                PointerDeviceKind.unknown,
+                              },
+                            ),
+                            child: Scrollbar(
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    ScrollConfiguration(
+                                      behavior: ScrollConfiguration.of(context)
+                                          .copyWith(
+                                        scrollbars: false,
+                                        dragDevices: {
+                                          PointerDeviceKind.mouse,
+                                          PointerDeviceKind.touch,
+                                          PointerDeviceKind.stylus,
+                                          PointerDeviceKind.unknown,
+                                        },
                                       ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 16.0, 0.0, 0.0),
-                                        child: Builder(
-                                          builder: (context) {
-                                            final displayConnectedDevices =
-                                                FFAppState()
-                                                    .currentDevices
-                                                    .toList();
-                                            if (displayConnectedDevices
-                                                .isEmpty) {
-                                              return Center(
-                                                child: Container(
-                                                  width: double.infinity,
-                                                  height: 50.0,
-                                                  child: EmptyDevicesWidget(
-                                                    text:
-                                                        'No connected devices',
-                                                  ),
-                                                ),
-                                              );
-                                            }
-
-                                            return ListView.builder(
-                                              padding: EdgeInsets.zero,
-                                              primary: false,
-                                              shrinkWrap: true,
-                                              scrollDirection: Axis.vertical,
-                                              itemCount: displayConnectedDevices
-                                                  .length,
-                                              itemBuilder: (context,
-                                                  displayConnectedDevicesIndex) {
-                                                final displayConnectedDevicesItem =
-                                                    displayConnectedDevices[
-                                                        displayConnectedDevicesIndex];
-                                                return Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 0.0, 0.0, 12.0),
-                                                  child: InkWell(
-                                                    splashColor:
-                                                        Colors.transparent,
-                                                    focusColor:
-                                                        Colors.transparent,
-                                                    hoverColor:
-                                                        Colors.transparent,
-                                                    highlightColor:
-                                                        Colors.transparent,
-                                                    onTap: () async {
-                                                      context.pushNamed(
-                                                          DevicePageWidget
-                                                              .routeName);
-                                                    },
-                                                    child: Container(
-                                                      width: double.infinity,
-                                                      decoration: BoxDecoration(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .accent2,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(16.0),
-                                                        border: Border.all(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .secondary,
-                                                          width: 1.0,
-                                                        ),
-                                                      ),
-                                                      child: Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    16.0,
-                                                                    12.0,
-                                                                    16.0,
-                                                                    12.0),
-                                                        child: Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
-                                                          children: [
-                                                            Column(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Row(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .min,
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .end,
-                                                                  children: [
-                                                                    Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                                                          0.0,
-                                                                          0.0,
-                                                                          8.0,
-                                                                          0.0),
-                                                                      child:
-                                                                          Text(
-                                                                        displayConnectedDevicesItem
-                                                                            .name,
-                                                                        textAlign:
-                                                                            TextAlign.start,
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .bodyLarge
-                                                                            .override(
-                                                                              font: GoogleFonts.roboto(
-                                                                                fontWeight: FlutterFlowTheme.of(context).bodyLarge.fontWeight,
-                                                                                fontStyle: FlutterFlowTheme.of(context).bodyLarge.fontStyle,
-                                                                              ),
-                                                                              letterSpacing: 0.0,
-                                                                              fontWeight: FlutterFlowTheme.of(context).bodyLarge.fontWeight,
-                                                                              fontStyle: FlutterFlowTheme.of(context).bodyLarge.fontStyle,
-                                                                            ),
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                                Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          5.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                                  child: Text(
-                                                                    displayConnectedDevicesItem
-                                                                        .id,
-                                                                    textAlign:
-                                                                        TextAlign
-                                                                            .start,
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .labelSmall
-                                                                        .override(
-                                                                          font:
-                                                                              GoogleFonts.roboto(
-                                                                            fontWeight:
-                                                                                FlutterFlowTheme.of(context).labelSmall.fontWeight,
-                                                                            fontStyle:
-                                                                                FlutterFlowTheme.of(context).labelSmall.fontStyle,
-                                                                          ),
-                                                                          letterSpacing:
-                                                                              0.0,
-                                                                          fontWeight: FlutterFlowTheme.of(context)
-                                                                              .labelSmall
-                                                                              .fontWeight,
-                                                                          fontStyle: FlutterFlowTheme.of(context)
-                                                                              .labelSmall
-                                                                              .fontStyle,
-                                                                        ),
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            Icon(
-                                                              Icons
-                                                                  .arrow_forward_ios_rounded,
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .primaryText,
-                                                              size: 24.0,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                );
-                                              },
-                                            );
-                                          },
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 50.0),
-                                  child: SingleChildScrollView(
-                                    primary: false,
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 10.0, 0.0, 0.0),
-                                          child: Row(
+                                      child: Scrollbar(
+                                        child: SingleChildScrollView(
+                                          primary: false,
+                                          child: Column(
                                             mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
-                                              Expanded(
-                                                child: Text(
-                                                  'Devices',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyLarge
-                                                      .override(
-                                                        font:
-                                                            GoogleFonts.roboto(
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyLarge
-                                                                  .fontStyle,
-                                                        ),
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontStyle:
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        0.0, 10.0, 0.0, 0.0),
+                                                child: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Expanded(
+                                                      child: Text(
+                                                        'Connected Devices',
+                                                        style:
                                                             FlutterFlowTheme.of(
                                                                     context)
                                                                 .bodyLarge
-                                                                .fontStyle,
+                                                                .override(
+                                                                  font: GoogleFonts
+                                                                      .roboto(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                    fontStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyLarge
+                                                                        .fontStyle,
+                                                                  ),
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyLarge
+                                                                      .fontStyle,
+                                                                ),
                                                       ),
+                                                    ),
+                                                    if (FFAppState()
+                                                        .isFetchingConnectedDevices)
+                                                      Text(
+                                                        'Finding...',
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodySmall
+                                                                .override(
+                                                                  font: GoogleFonts
+                                                                      .roboto(
+                                                                    fontWeight: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodySmall
+                                                                        .fontWeight,
+                                                                    fontStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodySmall
+                                                                        .fontStyle,
+                                                                  ),
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  fontWeight: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodySmall
+                                                                      .fontWeight,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodySmall
+                                                                      .fontStyle,
+                                                                ),
+                                                      ).animateOnPageLoad(
+                                                          animationsMap[
+                                                              'textOnPageLoadAnimation1']!),
+                                                  ],
                                                 ),
                                               ),
-                                              if (!FFAppState()
-                                                  .isFetchingDevices)
-                                                InkWell(
-                                                  splashColor:
-                                                      Colors.transparent,
-                                                  focusColor:
-                                                      Colors.transparent,
-                                                  hoverColor:
-                                                      Colors.transparent,
-                                                  highlightColor:
-                                                      Colors.transparent,
-                                                  onTap: () async {
-                                                    FFAppState()
-                                                            .isFetchingConnectedDevices =
-                                                        true;
-                                                    FFAppState()
-                                                            .isFetchingDevices =
-                                                        true;
-                                                    safeSetState(() {});
-                                                    _model.getConnectedDevicesOutput =
-                                                        await actions
-                                                            .getConnectedDevices();
-                                                    FFAppState()
-                                                            .ConnectedDevices =
-                                                        _model
-                                                            .getConnectedDevicesOutput!
-                                                            .toList()
-                                                            .cast<
-                                                                BTDeviceStruct>();
-                                                    FFAppState()
-                                                            .isFetchingConnectedDevices =
-                                                        false;
-                                                    safeSetState(() {});
-                                                    _model.findDevicesOutput =
-                                                        await actions
-                                                            .findDevices();
-                                                    FFAppState()
-                                                            .isFetchingDevices =
-                                                        false;
-                                                    FFAppState().foundDevices =
-                                                        _model
-                                                            .findDevicesOutput!
-                                                            .toList()
-                                                            .cast<
-                                                                BTDeviceStruct>();
-                                                    safeSetState(() {});
-
-                                                    safeSetState(() {});
-                                                  },
-                                                  child: Icon(
-                                                    Icons.refresh_rounded,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryText,
-                                                    size: 22.0,
-                                                  ),
-                                                ),
-                                              if (FFAppState()
-                                                  .isFetchingDevices)
-                                                Text(
-                                                  'Scanning...',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodySmall
-                                                      .override(
-                                                        font:
-                                                            GoogleFonts.roboto(
-                                                          fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodySmall
-                                                                  .fontWeight,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodySmall
-                                                                  .fontStyle,
-                                                        ),
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodySmall
-                                                                .fontWeight,
-                                                        fontStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodySmall
-                                                                .fontStyle,
-                                                      ),
-                                                ).animateOnPageLoad(animationsMap[
-                                                    'textOnPageLoadAnimation2']!),
-                                            ],
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 16.0, 0.0, 0.0),
-                                          child: Builder(
-                                            builder: (context) {
-                                              final displayDevices =
-                                                  FFAppState()
-                                                      .foundDevices
-                                                      .toList();
-                                              if (displayDevices.isEmpty) {
-                                                return Center(
-                                                  child: Container(
-                                                    width: double.infinity,
-                                                    height: 50.0,
-                                                    child: EmptyDevicesWidget(
-                                                      text: 'No devices found',
-                                                    ),
-                                                  ),
-                                                );
-                                              }
-
-                                              return ListView.builder(
-                                                padding: EdgeInsets.zero,
-                                                primary: false,
-                                                shrinkWrap: true,
-                                                scrollDirection: Axis.vertical,
-                                                itemCount:
-                                                    displayDevices.length,
-                                                itemBuilder: (context,
-                                                    displayDevicesIndex) {
-                                                  final displayDevicesItem =
-                                                      displayDevices[
-                                                          displayDevicesIndex];
-                                                  return Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 0.0,
-                                                                0.0, 12.0),
-                                                    child: InkWell(
-                                                      splashColor:
-                                                          Colors.transparent,
-                                                      focusColor:
-                                                          Colors.transparent,
-                                                      hoverColor:
-                                                          Colors.transparent,
-                                                      highlightColor:
-                                                          Colors.transparent,
-                                                      onTap: () async {
-                                                        _model.connectionSuccess =
-                                                            await actions
-                                                                .connectDevice(
-                                                          displayDevicesItem,
-                                                        );
-                                                        if (_model
-                                                            .connectionSuccess!) {
-                                                          if (!FFAppState()
-                                                              .currentDevices
-                                                              .contains(
-                                                                  displayDevicesItem)) {
-                                                            FFAppState()
-                                                                .addToCurrentDevices(
-                                                                    displayDevicesItem);
-                                                            safeSetState(() {});
-                                                          }
-                                                          FFAppState()
-                                                                  .currentDevice =
-                                                              displayDevicesItem;
-                                                          FFAppState()
-                                                                  .isDeviceConnected =
-                                                              true;
-                                                          safeSetState(() {});
-
-                                                          context.pushNamed(
-                                                              DevicePageWidget
-                                                                  .routeName);
-                                                        } else {
-                                                          ScaffoldMessenger.of(
-                                                                  context)
-                                                              .showSnackBar(
-                                                            SnackBar(
-                                                              content: Text(
-                                                                'Connection Failed!',
-                                                                style:
-                                                                    TextStyle(
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .error,
-                                                                ),
-                                                              ),
-                                                              duration: Duration(
-                                                                  milliseconds:
-                                                                      4000),
-                                                              backgroundColor:
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .alternate,
-                                                            ),
-                                                          );
-                                                        }
-
-                                                        safeSetState(() {});
-                                                      },
-                                                      child: Container(
-                                                        width: double.infinity,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .accent2,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      16.0),
-                                                          border: Border.all(
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .secondary,
-                                                            width: 1.0,
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        0.0, 16.0, 0.0, 0.0),
+                                                child: Builder(
+                                                  builder: (context) {
+                                                    final displayConnectedDevices =
+                                                        FFAppState()
+                                                            .currentDevices
+                                                            .toList();
+                                                    if (displayConnectedDevices
+                                                        .isEmpty) {
+                                                      return Center(
+                                                        child: Container(
+                                                          width:
+                                                              double.infinity,
+                                                          height: 50.0,
+                                                          child:
+                                                              EmptyDevicesWidget(
+                                                            text:
+                                                                'No connected devices',
                                                           ),
                                                         ),
-                                                        child: Padding(
+                                                      );
+                                                    }
+
+                                                    return ListView.builder(
+                                                      padding: EdgeInsets.zero,
+                                                      primary: false,
+                                                      shrinkWrap: true,
+                                                      scrollDirection:
+                                                          Axis.vertical,
+                                                      itemCount:
+                                                          displayConnectedDevices
+                                                              .length,
+                                                      itemBuilder: (context,
+                                                          displayConnectedDevicesIndex) {
+                                                        final displayConnectedDevicesItem =
+                                                            displayConnectedDevices[
+                                                                displayConnectedDevicesIndex];
+                                                        return Padding(
                                                           padding:
                                                               EdgeInsetsDirectional
                                                                   .fromSTEB(
-                                                                      16.0,
-                                                                      12.0,
-                                                                      16.0,
+                                                                      0.0,
+                                                                      0.0,
+                                                                      0.0,
                                                                       12.0),
-                                                          child: Row(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceBetween,
-                                                            children: [
-                                                              Column(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .center,
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  Row(
+                                                          child: InkWell(
+                                                            splashColor: Colors
+                                                                .transparent,
+                                                            focusColor: Colors
+                                                                .transparent,
+                                                            hoverColor: Colors
+                                                                .transparent,
+                                                            highlightColor:
+                                                                Colors
+                                                                    .transparent,
+                                                            onTap: () async {
+                                                              context.pushNamed(
+                                                                  DevicePageWidget
+                                                                      .routeName);
+                                                            },
+                                                            child: Container(
+                                                              width: double
+                                                                  .infinity,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .accent2,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            16.0),
+                                                                border:
+                                                                    Border.all(
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .secondary,
+                                                                  width: 1.0,
+                                                                ),
+                                                              ),
+                                                              child: Padding(
+                                                                padding: EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        16.0,
+                                                                        12.0,
+                                                                        16.0,
+                                                                        12.0),
+                                                                child: Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .spaceBetween,
+                                                                  children: [
+                                                                    Column(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .start,
+                                                                      children: [
+                                                                        Row(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.min,
+                                                                          crossAxisAlignment:
+                                                                              CrossAxisAlignment.end,
+                                                                          children: [
+                                                                            Padding(
+                                                                              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 0.0),
+                                                                              child: Text(
+                                                                                displayConnectedDevicesItem.name,
+                                                                                textAlign: TextAlign.start,
+                                                                                style: FlutterFlowTheme.of(context).bodyLarge.override(
+                                                                                      font: GoogleFonts.roboto(
+                                                                                        fontWeight: FlutterFlowTheme.of(context).bodyLarge.fontWeight,
+                                                                                        fontStyle: FlutterFlowTheme.of(context).bodyLarge.fontStyle,
+                                                                                      ),
+                                                                                      letterSpacing: 0.0,
+                                                                                      fontWeight: FlutterFlowTheme.of(context).bodyLarge.fontWeight,
+                                                                                      fontStyle: FlutterFlowTheme.of(context).bodyLarge.fontStyle,
+                                                                                    ),
+                                                                              ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                        Padding(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              0.0,
+                                                                              5.0,
+                                                                              0.0,
+                                                                              0.0),
+                                                                          child:
+                                                                              Text(
+                                                                            displayConnectedDevicesItem.id,
+                                                                            textAlign:
+                                                                                TextAlign.start,
+                                                                            style: FlutterFlowTheme.of(context).labelSmall.override(
+                                                                                  font: GoogleFonts.roboto(
+                                                                                    fontWeight: FlutterFlowTheme.of(context).labelSmall.fontWeight,
+                                                                                    fontStyle: FlutterFlowTheme.of(context).labelSmall.fontStyle,
+                                                                                  ),
+                                                                                  letterSpacing: 0.0,
+                                                                                  fontWeight: FlutterFlowTheme.of(context).labelSmall.fontWeight,
+                                                                                  fontStyle: FlutterFlowTheme.of(context).labelSmall.fontStyle,
+                                                                                ),
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                    Icon(
+                                                                      Icons
+                                                                          .arrow_forward_ios_rounded,
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primaryText,
+                                                                      size:
+                                                                          24.0,
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        );
+                                                      },
+                                                    );
+                                                  },
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 50.0),
+                                      child: ScrollConfiguration(
+                                        behavior:
+                                            ScrollConfiguration.of(context)
+                                                .copyWith(
+                                          scrollbars: false,
+                                          dragDevices: {
+                                            PointerDeviceKind.mouse,
+                                            PointerDeviceKind.touch,
+                                            PointerDeviceKind.stylus,
+                                            PointerDeviceKind.unknown,
+                                          },
+                                        ),
+                                        child: Scrollbar(
+                                          child: SingleChildScrollView(
+                                            primary: false,
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 10.0, 0.0, 0.0),
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Expanded(
+                                                        child: Text(
+                                                          'Devices',
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyLarge
+                                                              .override(
+                                                                font:
+                                                                    GoogleFonts
+                                                                        .roboto(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyLarge
+                                                                      .fontStyle,
+                                                                ),
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                fontStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyLarge
+                                                                    .fontStyle,
+                                                              ),
+                                                        ),
+                                                      ),
+                                                      if (!FFAppState()
+                                                          .isFetchingDevices)
+                                                        InkWell(
+                                                          splashColor: Colors
+                                                              .transparent,
+                                                          focusColor: Colors
+                                                              .transparent,
+                                                          hoverColor: Colors
+                                                              .transparent,
+                                                          highlightColor: Colors
+                                                              .transparent,
+                                                          onTap: () async {
+                                                            FFAppState()
+                                                                    .isFetchingConnectedDevices =
+                                                                true;
+                                                            FFAppState()
+                                                                    .isFetchingDevices =
+                                                                true;
+                                                            safeSetState(() {});
+                                                            _model.getConnectedDevicesOutput =
+                                                                await actions
+                                                                    .getConnectedDevices();
+                                                            FFAppState()
+                                                                    .ConnectedDevices =
+                                                                _model
+                                                                    .getConnectedDevicesOutput!
+                                                                    .toList()
+                                                                    .cast<
+                                                                        BTDeviceStruct>();
+                                                            FFAppState()
+                                                                    .isFetchingConnectedDevices =
+                                                                false;
+                                                            safeSetState(() {});
+                                                            _model.findDevicesOutput =
+                                                                await actions
+                                                                    .findDevices();
+                                                            FFAppState()
+                                                                    .isFetchingDevices =
+                                                                false;
+                                                            FFAppState()
+                                                                    .foundDevices =
+                                                                _model
+                                                                    .findDevicesOutput!
+                                                                    .toList()
+                                                                    .cast<
+                                                                        BTDeviceStruct>();
+                                                            safeSetState(() {});
+
+                                                            safeSetState(() {});
+                                                          },
+                                                          child: Icon(
+                                                            Icons
+                                                                .refresh_rounded,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .secondaryText,
+                                                            size: 22.0,
+                                                          ),
+                                                        ),
+                                                      if (FFAppState()
+                                                          .isFetchingDevices)
+                                                        Text(
+                                                          'Scanning...',
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodySmall
+                                                              .override(
+                                                                font:
+                                                                    GoogleFonts
+                                                                        .roboto(
+                                                                  fontWeight: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodySmall
+                                                                      .fontWeight,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodySmall
+                                                                      .fontStyle,
+                                                                ),
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodySmall
+                                                                    .fontWeight,
+                                                                fontStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodySmall
+                                                                    .fontStyle,
+                                                              ),
+                                                        ).animateOnPageLoad(
+                                                            animationsMap[
+                                                                'textOnPageLoadAnimation2']!),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 16.0, 0.0, 0.0),
+                                                  child: Builder(
+                                                    builder: (context) {
+                                                      final displayDevices =
+                                                          FFAppState()
+                                                              .foundDevices
+                                                              .toList();
+                                                      if (displayDevices
+                                                          .isEmpty) {
+                                                        return Center(
+                                                          child: Container(
+                                                            width:
+                                                                double.infinity,
+                                                            height: 50.0,
+                                                            child:
+                                                                EmptyDevicesWidget(
+                                                              text:
+                                                                  'No devices found',
+                                                            ),
+                                                          ),
+                                                        );
+                                                      }
+
+                                                      return ListView.builder(
+                                                        padding:
+                                                            EdgeInsets.zero,
+                                                        primary: false,
+                                                        shrinkWrap: true,
+                                                        scrollDirection:
+                                                            Axis.vertical,
+                                                        itemCount:
+                                                            displayDevices
+                                                                .length,
+                                                        itemBuilder: (context,
+                                                            displayDevicesIndex) {
+                                                          final displayDevicesItem =
+                                                              displayDevices[
+                                                                  displayDevicesIndex];
+                                                          return Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0.0,
+                                                                        0.0,
+                                                                        0.0,
+                                                                        12.0),
+                                                            child: InkWell(
+                                                              splashColor: Colors
+                                                                  .transparent,
+                                                              focusColor: Colors
+                                                                  .transparent,
+                                                              hoverColor: Colors
+                                                                  .transparent,
+                                                              highlightColor:
+                                                                  Colors
+                                                                      .transparent,
+                                                              onTap: () async {
+                                                                _model.connectionSuccess =
+                                                                    await actions
+                                                                        .connectDevice(
+                                                                  displayDevicesItem,
+                                                                );
+                                                                if (_model
+                                                                    .connectionSuccess!) {
+                                                                  if (!FFAppState()
+                                                                      .currentDevices
+                                                                      .contains(
+                                                                          displayDevicesItem)) {
+                                                                    FFAppState()
+                                                                        .addToCurrentDevices(
+                                                                            displayDevicesItem);
+                                                                    safeSetState(
+                                                                        () {});
+                                                                  }
+                                                                  FFAppState()
+                                                                          .currentDevice =
+                                                                      displayDevicesItem;
+                                                                  FFAppState()
+                                                                          .isDeviceConnected =
+                                                                      true;
+                                                                  safeSetState(
+                                                                      () {});
+
+                                                                  context.pushNamed(
+                                                                      DevicePageWidget
+                                                                          .routeName);
+                                                                } else {
+                                                                  ScaffoldMessenger.of(
+                                                                          context)
+                                                                      .showSnackBar(
+                                                                    SnackBar(
+                                                                      content:
+                                                                          Text(
+                                                                        'Connection Failed!',
+                                                                        style:
+                                                                            TextStyle(
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).error,
+                                                                        ),
+                                                                      ),
+                                                                      duration: Duration(
+                                                                          milliseconds:
+                                                                              4000),
+                                                                      backgroundColor:
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .alternate,
+                                                                    ),
+                                                                  );
+                                                                }
+
+                                                                safeSetState(
+                                                                    () {});
+                                                              },
+                                                              child: Container(
+                                                                width: double
+                                                                    .infinity,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .accent2,
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              16.0),
+                                                                  border: Border
+                                                                      .all(
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .secondary,
+                                                                    width: 1.0,
+                                                                  ),
+                                                                ),
+                                                                child: Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          16.0,
+                                                                          12.0,
+                                                                          16.0,
+                                                                          12.0),
+                                                                  child: Row(
                                                                     mainAxisSize:
                                                                         MainAxisSize
                                                                             .max,
-                                                                    crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .end,
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .spaceBetween,
                                                                     children: [
-                                                                      Padding(
-                                                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            8.0,
-                                                                            0.0),
-                                                                        child:
-                                                                            Text(
-                                                                          displayDevicesItem
-                                                                              .name,
-                                                                          textAlign:
-                                                                              TextAlign.start,
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyLarge
-                                                                              .override(
-                                                                                font: GoogleFonts.roboto(
-                                                                                  fontWeight: FlutterFlowTheme.of(context).bodyLarge.fontWeight,
-                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyLarge.fontStyle,
+                                                                      Column(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.max,
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.center,
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.start,
+                                                                        children: [
+                                                                          Row(
+                                                                            mainAxisSize:
+                                                                                MainAxisSize.max,
+                                                                            crossAxisAlignment:
+                                                                                CrossAxisAlignment.end,
+                                                                            children: [
+                                                                              Padding(
+                                                                                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 0.0),
+                                                                                child: Text(
+                                                                                  displayDevicesItem.name,
+                                                                                  textAlign: TextAlign.start,
+                                                                                  style: FlutterFlowTheme.of(context).bodyLarge.override(
+                                                                                        font: GoogleFonts.roboto(
+                                                                                          fontWeight: FlutterFlowTheme.of(context).bodyLarge.fontWeight,
+                                                                                          fontStyle: FlutterFlowTheme.of(context).bodyLarge.fontStyle,
+                                                                                        ),
+                                                                                        letterSpacing: 0.0,
+                                                                                        fontWeight: FlutterFlowTheme.of(context).bodyLarge.fontWeight,
+                                                                                        fontStyle: FlutterFlowTheme.of(context).bodyLarge.fontStyle,
+                                                                                      ),
                                                                                 ),
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FlutterFlowTheme.of(context).bodyLarge.fontWeight,
-                                                                                fontStyle: FlutterFlowTheme.of(context).bodyLarge.fontStyle,
                                                                               ),
-                                                                        ),
+                                                                            ],
+                                                                          ),
+                                                                          Padding(
+                                                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                                                0.0,
+                                                                                5.0,
+                                                                                0.0,
+                                                                                0.0),
+                                                                            child:
+                                                                                Text(
+                                                                              displayDevicesItem.id,
+                                                                              textAlign: TextAlign.start,
+                                                                              style: FlutterFlowTheme.of(context).labelSmall.override(
+                                                                                    font: GoogleFonts.roboto(
+                                                                                      fontWeight: FlutterFlowTheme.of(context).labelSmall.fontWeight,
+                                                                                      fontStyle: FlutterFlowTheme.of(context).labelSmall.fontStyle,
+                                                                                    ),
+                                                                                    letterSpacing: 0.0,
+                                                                                    fontWeight: FlutterFlowTheme.of(context).labelSmall.fontWeight,
+                                                                                    fontStyle: FlutterFlowTheme.of(context).labelSmall.fontStyle,
+                                                                                  ),
+                                                                            ),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                      Icon(
+                                                                        Icons
+                                                                            .arrow_forward_ios_rounded,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primaryText,
+                                                                        size:
+                                                                            24.0,
                                                                       ),
                                                                     ],
                                                                   ),
-                                                                  Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            5.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                    child: Text(
-                                                                      displayDevicesItem
-                                                                          .id,
-                                                                      textAlign:
-                                                                          TextAlign
-                                                                              .start,
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .labelSmall
-                                                                          .override(
-                                                                            font:
-                                                                                GoogleFonts.roboto(
-                                                                              fontWeight: FlutterFlowTheme.of(context).labelSmall.fontWeight,
-                                                                              fontStyle: FlutterFlowTheme.of(context).labelSmall.fontStyle,
-                                                                            ),
-                                                                            letterSpacing:
-                                                                                0.0,
-                                                                            fontWeight:
-                                                                                FlutterFlowTheme.of(context).labelSmall.fontWeight,
-                                                                            fontStyle:
-                                                                                FlutterFlowTheme.of(context).labelSmall.fontStyle,
-                                                                          ),
-                                                                    ),
-                                                                  ),
-                                                                ],
+                                                                ),
                                                               ),
-                                                              Icon(
-                                                                Icons
-                                                                    .arrow_forward_ios_rounded,
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primaryText,
-                                                                size: 24.0,
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  );
-                                                },
-                                              );
-                                            },
+                                                            ),
+                                                          );
+                                                        },
+                                                      );
+                                                    },
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                      ],
+                                      ),
                                     ),
-                                  ),
+                                  ],
                                 ),
-                              ],
+                              ),
                             ),
                           ),
                         ],

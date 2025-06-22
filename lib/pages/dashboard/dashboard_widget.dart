@@ -150,18 +150,30 @@ class _DashboardWidgetState extends State<DashboardWidget> {
             children: [
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 24.0),
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Column(
+                child: ScrollConfiguration(
+                  behavior: ScrollConfiguration.of(context).copyWith(
+                    scrollbars: false,
+                    dragDevices: {
+                      PointerDeviceKind.mouse,
+                      PointerDeviceKind.touch,
+                      PointerDeviceKind.stylus,
+                      PointerDeviceKind.unknown,
+                    },
+                  ),
+                  child: Scrollbar(
+                    child: SingleChildScrollView(
+                      child: Column(
                         mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            'Current Posture',
-                            style:
-                                FlutterFlowTheme.of(context).bodyLarge.override(
+                          Column(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Current Posture',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyLarge
+                                    .override(
                                       font: GoogleFonts.roboto(
                                         fontWeight: FontWeight.w600,
                                         fontStyle: FlutterFlowTheme.of(context)
@@ -174,16 +186,17 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                           .bodyLarge
                                           .fontStyle,
                                     ),
-                          ),
-                          wrapWithModel(
-                            model: _model.currentPostureModel,
-                            updateCallback: () => safeSetState(() {}),
-                            child: CurrentPostureWidget(),
-                          ),
-                          Text(
-                            'Current Activity',
-                            style:
-                                FlutterFlowTheme.of(context).bodyLarge.override(
+                              ),
+                              wrapWithModel(
+                                model: _model.currentPostureModel,
+                                updateCallback: () => safeSetState(() {}),
+                                child: CurrentPostureWidget(),
+                              ),
+                              Text(
+                                'Current Activity',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyLarge
+                                    .override(
                                       font: GoogleFonts.roboto(
                                         fontWeight: FontWeight.w600,
                                         fontStyle: FlutterFlowTheme.of(context)
@@ -196,16 +209,17 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                           .bodyLarge
                                           .fontStyle,
                                     ),
-                          ),
-                          wrapWithModel(
-                            model: _model.currentActivityModel,
-                            updateCallback: () => safeSetState(() {}),
-                            child: CurrentActivityWidget(),
-                          ),
-                          Text(
-                            'Activity Chart',
-                            style:
-                                FlutterFlowTheme.of(context).bodyLarge.override(
+                              ),
+                              wrapWithModel(
+                                model: _model.currentActivityModel,
+                                updateCallback: () => safeSetState(() {}),
+                                child: CurrentActivityWidget(),
+                              ),
+                              Text(
+                                'Activity Chart',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyLarge
+                                    .override(
                                       font: GoogleFonts.roboto(
                                         fontWeight: FontWeight.w600,
                                         fontStyle: FlutterFlowTheme.of(context)
@@ -218,243 +232,262 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                           .bodyLarge
                                           .fontStyle,
                                     ),
-                          ),
-                          Container(
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 4.0,
-                                  color: FlutterFlowTheme.of(context).accent2,
-                                  offset: Offset(
-                                    0.0,
-                                    2.0,
-                                  ),
-                                )
-                              ],
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.all(12.0),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Container(
-                                    width: double.infinity,
-                                    height: 300.0,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                    child: Container(
-                                      width: 370.0,
-                                      height: 255.9,
-                                      child: FlutterFlowBarChart(
-                                        barData: [
-                                          FFBarChartData(
-                                            yData: FFAppState()
-                                                .globalActivityDurations
-                                                .map((e) => e.goodDuration)
-                                                .toList(),
-                                            color: FlutterFlowTheme.of(context)
-                                                .success,
-                                          ),
-                                          FFBarChartData(
-                                            yData: FFAppState()
-                                                .globalActivityDurations
-                                                .map((e) => e.badDuration)
-                                                .toList(),
-                                            color: FlutterFlowTheme.of(context)
-                                                .error,
-                                          )
-                                        ],
-                                        xLabels: FFAppState()
-                                            .globalActivityDurations
-                                            .map((e) => e.activityName)
-                                            .toList(),
-                                        barWidth: 16.0,
-                                        barBorderRadius:
-                                            BorderRadius.circular(8.0),
-                                        barSpace: 0.0,
-                                        groupSpace: 8.0,
-                                        alignment:
-                                            BarChartAlignment.spaceAround,
-                                        chartStylingInfo: ChartStylingInfo(
-                                          backgroundColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .primaryBackground,
-                                          showBorder: false,
+                              ),
+                              Container(
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 4.0,
+                                      color:
+                                          FlutterFlowTheme.of(context).accent2,
+                                      offset: Offset(
+                                        0.0,
+                                        2.0,
+                                      ),
+                                    )
+                                  ],
+                                  borderRadius: BorderRadius.circular(12.0),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.all(12.0),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Container(
+                                        width: double.infinity,
+                                        height: 300.0,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
                                         ),
-                                        axisBounds: AxisBounds(
-                                          maxY: 12.0,
-                                        ),
-                                        xAxisLabelInfo: AxisLabelInfo(
-                                          showLabels: true,
-                                          labelTextStyle: FlutterFlowTheme.of(
-                                                  context)
-                                              .labelSmall
-                                              .override(
-                                                font: GoogleFonts.roboto(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .labelSmall
-                                                          .fontStyle,
-                                                ),
-                                                letterSpacing: 0.0,
-                                                fontWeight: FontWeight.bold,
-                                                fontStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelSmall
-                                                        .fontStyle,
-                                              ),
-                                          labelInterval: 10.0,
-                                          reservedSize: 28.0,
-                                        ),
-                                        yAxisLabelInfo: AxisLabelInfo(
-                                          showLabels: true,
-                                          labelTextStyle: FlutterFlowTheme.of(
-                                                  context)
-                                              .labelSmall
-                                              .override(
-                                                font: GoogleFonts.roboto(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .labelSmall
-                                                          .fontStyle,
-                                                ),
+                                        child: Container(
+                                          width: 370.0,
+                                          height: 255.9,
+                                          child: FlutterFlowBarChart(
+                                            barData: [
+                                              FFBarChartData(
+                                                yData: FFAppState()
+                                                    .globalActivityDurations
+                                                    .map((e) => e.goodDuration)
+                                                    .toList(),
                                                 color:
                                                     FlutterFlowTheme.of(context)
-                                                        .secondaryText,
-                                                letterSpacing: 0.0,
-                                                fontWeight: FontWeight.bold,
-                                                fontStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelSmall
-                                                        .fontStyle,
+                                                        .success,
                                               ),
-                                          labelInterval: 1.0,
-                                          labelFormatter: LabelFormatter(
-                                            numberFormat: (val) => formatNumber(
-                                              val,
-                                              formatType: FormatType.decimal,
-                                              decimalType:
-                                                  DecimalType.periodDecimal,
+                                              FFBarChartData(
+                                                yData: FFAppState()
+                                                    .globalActivityDurations
+                                                    .map((e) => e.badDuration)
+                                                    .toList(),
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .error,
+                                              )
+                                            ],
+                                            xLabels: FFAppState()
+                                                .globalActivityDurations
+                                                .map((e) => e.activityName)
+                                                .toList(),
+                                            barWidth: 16.0,
+                                            barBorderRadius:
+                                                BorderRadius.circular(8.0),
+                                            barSpace: 0.0,
+                                            groupSpace: 8.0,
+                                            alignment:
+                                                BarChartAlignment.spaceAround,
+                                            chartStylingInfo: ChartStylingInfo(
+                                              backgroundColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryBackground,
+                                              showBorder: false,
+                                            ),
+                                            axisBounds: AxisBounds(
+                                              maxY: 12.0,
+                                            ),
+                                            xAxisLabelInfo: AxisLabelInfo(
+                                              showLabels: true,
+                                              labelTextStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelSmall
+                                                      .override(
+                                                        font:
+                                                            GoogleFonts.roboto(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelSmall
+                                                                  .fontStyle,
+                                                        ),
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .labelSmall
+                                                                .fontStyle,
+                                                      ),
+                                              labelInterval: 10.0,
+                                              reservedSize: 28.0,
+                                            ),
+                                            yAxisLabelInfo: AxisLabelInfo(
+                                              showLabels: true,
+                                              labelTextStyle: FlutterFlowTheme
+                                                      .of(context)
+                                                  .labelSmall
+                                                  .override(
+                                                    font: GoogleFonts.roboto(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelSmall
+                                                              .fontStyle,
+                                                    ),
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondaryText,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelSmall
+                                                            .fontStyle,
+                                                  ),
+                                              labelInterval: 1.0,
+                                              labelFormatter: LabelFormatter(
+                                                numberFormat: (val) =>
+                                                    formatNumber(
+                                                  val,
+                                                  formatType:
+                                                      FormatType.decimal,
+                                                  decimalType:
+                                                      DecimalType.periodDecimal,
+                                                ),
+                                              ),
+                                              reservedSize: 20.0,
                                             ),
                                           ),
-                                          reservedSize: 20.0,
                                         ),
                                       ),
-                                    ),
-                                  ),
-                                  Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
                                       Row(
                                         mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: [
-                                          Container(
-                                            width: 12.0,
-                                            height: 12.0,
-                                            decoration: BoxDecoration(
-                                              color: Color(0xFF00C853),
-                                              borderRadius:
-                                                  BorderRadius.circular(2.0),
-                                            ),
-                                          ),
-                                          Text(
-                                            'Good',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  font: GoogleFonts.roboto(
-                                                    fontWeight:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMedium
-                                                            .fontWeight,
-                                                    fontStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMedium
-                                                            .fontStyle,
-                                                  ),
-                                                  color: Color(0xFF1A2A3A),
-                                                  fontSize: 14.0,
-                                                  letterSpacing: 0.0,
-                                                  fontWeight:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMedium
-                                                          .fontWeight,
-                                                  fontStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMedium
-                                                          .fontStyle,
+                                          Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Container(
+                                                width: 12.0,
+                                                height: 12.0,
+                                                decoration: BoxDecoration(
+                                                  color: Color(0xFF00C853),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          2.0),
                                                 ),
+                                              ),
+                                              Text(
+                                                'Good',
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyMedium
+                                                    .override(
+                                                      font: GoogleFonts.roboto(
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontStyle,
+                                                      ),
+                                                      color: Color(0xFF1A2A3A),
+                                                      fontSize: 14.0,
+                                                      letterSpacing: 0.0,
+                                                      fontWeight:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .fontWeight,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .fontStyle,
+                                                    ),
+                                              ),
+                                            ].divide(SizedBox(width: 8.0)),
                                           ),
-                                        ].divide(SizedBox(width: 8.0)),
-                                      ),
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Container(
-                                            width: 12.0,
-                                            height: 12.0,
-                                            decoration: BoxDecoration(
-                                              color: Color(0xFFD50000),
-                                              borderRadius:
-                                                  BorderRadius.circular(2.0),
-                                            ),
-                                          ),
-                                          Text(
-                                            'Bad',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  font: GoogleFonts.roboto(
-                                                    fontWeight:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMedium
-                                                            .fontWeight,
-                                                    fontStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMedium
-                                                            .fontStyle,
-                                                  ),
-                                                  color: Color(0xFF1A2A3A),
-                                                  fontSize: 14.0,
-                                                  letterSpacing: 0.0,
-                                                  fontWeight:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMedium
-                                                          .fontWeight,
-                                                  fontStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMedium
-                                                          .fontStyle,
+                                          Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Container(
+                                                width: 12.0,
+                                                height: 12.0,
+                                                decoration: BoxDecoration(
+                                                  color: Color(0xFFD50000),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          2.0),
                                                 ),
+                                              ),
+                                              Text(
+                                                'Bad',
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyMedium
+                                                    .override(
+                                                      font: GoogleFonts.roboto(
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontStyle,
+                                                      ),
+                                                      color: Color(0xFF1A2A3A),
+                                                      fontSize: 14.0,
+                                                      letterSpacing: 0.0,
+                                                      fontWeight:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .fontWeight,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .fontStyle,
+                                                    ),
+                                              ),
+                                            ].divide(SizedBox(width: 8.0)),
                                           ),
-                                        ].divide(SizedBox(width: 8.0)),
+                                        ].divide(SizedBox(width: 24.0)),
                                       ),
-                                    ].divide(SizedBox(width: 24.0)),
+                                    ].divide(SizedBox(height: 16.0)),
                                   ),
-                                ].divide(SizedBox(height: 16.0)),
+                                ),
                               ),
-                            ),
+                            ].divide(SizedBox(height: 16.0)),
                           ),
-                        ].divide(SizedBox(height: 16.0)),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
                 ),
               ),
