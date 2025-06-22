@@ -16,3 +16,4 @@ export 'manage_connection_state_listener.dart'
 export 'process_and_aggregate_data_batch.dart'
     show processAndAggregateDataBatch;
 export 'prepare_journey_data.dart' show prepareJourneyData;
+export 'start_all_device_listeners.dart' show startAllDeviceListeners;

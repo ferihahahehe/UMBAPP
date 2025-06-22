@@ -304,7 +304,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                               showBorder: false,
                                             ),
                                             axisBounds: AxisBounds(
-                                              maxY: 12.0,
+                                              maxY: 2.0,
                                             ),
                                             xAxisLabelInfo: AxisLabelInfo(
                                               showLabels: true,

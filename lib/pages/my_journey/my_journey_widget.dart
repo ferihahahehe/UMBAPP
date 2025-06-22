@@ -285,7 +285,7 @@ class _MyJourneyWidgetState extends State<MyJourneyWidget> {
                                             showBorder: false,
                                           ),
                                           axisBounds: AxisBounds(
-                                            maxY: 12.0,
+                                            maxY: 2.0,
                                           ),
                                           xAxisLabelInfo: AxisLabelInfo(
                                             showLabels: true,
@@ -545,7 +545,7 @@ class _MyJourneyWidgetState extends State<MyJourneyWidget> {
                                             showBorder: false,
                                           ),
                                           axisBounds: AxisBounds(
-                                            maxY: 12.0,
+                                            maxY: 2.0,
                                           ),
                                           xAxisLabelInfo: AxisLabelInfo(
                                             showLabels: true,
@@ -805,7 +805,7 @@ class _MyJourneyWidgetState extends State<MyJourneyWidget> {
                                             showBorder: false,
                                           ),
                                           axisBounds: AxisBounds(
-                                            maxY: 12.0,
+                                            maxY: 2.0,
                                           ),
                                           xAxisLabelInfo: AxisLabelInfo(
                                             showLabels: true,
@@ -1065,7 +1065,7 @@ class _MyJourneyWidgetState extends State<MyJourneyWidget> {
                                             showBorder: false,
                                           ),
                                           axisBounds: AxisBounds(
-                                            maxY: 12.0,
+                                            maxY: 2.0,
                                           ),
                                           xAxisLabelInfo: AxisLabelInfo(
                                             showLabels: true,
@@ -1325,7 +1325,7 @@ class _MyJourneyWidgetState extends State<MyJourneyWidget> {
                                             showBorder: false,
                                           ),
                                           axisBounds: AxisBounds(
-                                            maxY: 12.0,
+                                            maxY: 2.0,
                                           ),
                                           xAxisLabelInfo: AxisLabelInfo(
                                             showLabels: true,

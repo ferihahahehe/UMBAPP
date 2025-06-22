@@ -15,20 +15,8 @@ import 'index.dart'; // Pastikan ini mengimpor semua custom action lain
 Future<bool> connectDevice(BTDeviceStruct deviceInfo) async {
   final device = BluetoothDevice.fromId(deviceInfo.id);
   try {
-    // 1. Hubungkan ke perangkat
-    await device.connect();
-
-    // Perbarui status koneksi di App State
+    await device.connect(mtu: null);
     FFAppState().isDeviceConnected = true;
-
-    // 2. Mulai memantau status koneksi perangkat ini
-    await manageConnectionStateListener('start', deviceInfo);
-
-    // 3. Mulai mendengarkan data dari perangkat
-    await manageDataListener('start', deviceInfo);
-
-    // 4. Aktifkan "Otak Utama" / Prosesor Global
-    await startGlobalDataProcessor();
     return true;
   } catch (e) {
     debugPrint('Connection failed: ${e.toString()}');

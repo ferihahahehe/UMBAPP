@@ -37,6 +37,7 @@ class _DevicePageWidgetState extends State<DevicePageWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await actions.startAllDeviceListeners();
       _model.rssiUpdateTimer = InstantTimer.periodic(
         duration: Duration(milliseconds: 2000),
         callback: (timer) async {

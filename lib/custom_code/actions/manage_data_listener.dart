@@ -32,6 +32,12 @@ Future<void> manageDataListener(String action, BTDeviceStruct device) async {
     await BLESingleton.dataSubscription?.cancel();
 
     try {
+      // ===== PERUBAHAN DI SINI =====
+      // Memberi jeda 500ms agar perangkat periferal stabil setelah koneksi.
+      // Ini adalah workaround umum untuk masalah di mana discoverServices() gagal.
+      await Future.delayed(const Duration(milliseconds: 500));
+      // ============================
+
       final services = await bluetoothDevice.discoverServices();
       for (BluetoothService service in services) {
         for (BluetoothCharacteristic characteristic
