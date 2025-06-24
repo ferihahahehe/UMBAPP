@@ -157,29 +157,42 @@ class _DevicePageWidgetState extends State<DevicePageWidget> {
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Align(
-                      alignment: AlignmentDirectional(-1.0, 0.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 10.0, 0.0),
-                                child: Text(
-                                  FFAppState().currentDevice.name,
-                                  style: FlutterFlowTheme.of(context)
-                                      .titleLarge
-                                      .override(
-                                        font: GoogleFonts.roboto(
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Align(
+                        alignment: AlignmentDirectional(-1.0, 0.0),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 10.0, 0.0),
+                                  child: Text(
+                                    FFAppState().currentDevice.name,
+                                    style: FlutterFlowTheme.of(context)
+                                        .titleLarge
+                                        .override(
+                                          font: GoogleFonts.roboto(
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleLarge
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleLarge
+                                                    .fontStyle,
+                                          ),
+                                          fontSize: 18.0,
+                                          letterSpacing: 0.0,
                                           fontWeight:
                                               FlutterFlowTheme.of(context)
                                                   .titleLarge
@@ -189,38 +202,37 @@ class _DevicePageWidgetState extends State<DevicePageWidget> {
                                                   .titleLarge
                                                   .fontStyle,
                                         ),
-                                        fontSize: 18.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .titleLarge
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .titleLarge
-                                            .fontStyle,
-                                      ),
-                                ),
-                              ),
-                              if (FFAppState().currentDevice.hasId())
-                                wrapWithModel(
-                                  model: _model.strengthIndicatorModel,
-                                  updateCallback: () => safeSetState(() {}),
-                                  child: StrengthIndicatorWidget(
-                                    rssi: _model.currentRssi,
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
                                   ),
                                 ),
-                            ],
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 5.0, 0.0, 0.0),
-                            child: Text(
-                              FFAppState().currentDevice.id,
-                              style: FlutterFlowTheme.of(context)
-                                  .labelSmall
-                                  .override(
-                                    font: GoogleFonts.roboto(
+                                if (FFAppState().currentDevice.hasId())
+                                  wrapWithModel(
+                                    model: _model.strengthIndicatorModel,
+                                    updateCallback: () => safeSetState(() {}),
+                                    child: StrengthIndicatorWidget(
+                                      rssi: _model.currentRssi,
+                                      color: FlutterFlowTheme.of(context)
+                                          .alternate,
+                                    ),
+                                  ),
+                              ],
+                            ),
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 5.0, 0.0, 0.0),
+                              child: Text(
+                                FFAppState().currentDevice.id,
+                                style: FlutterFlowTheme.of(context)
+                                    .labelSmall
+                                    .override(
+                                      font: GoogleFonts.roboto(
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .labelSmall
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .labelSmall
+                                            .fontStyle,
+                                      ),
+                                      letterSpacing: 0.0,
                                       fontWeight: FlutterFlowTheme.of(context)
                                           .labelSmall
                                           .fontWeight,
@@ -228,95 +240,99 @@ class _DevicePageWidgetState extends State<DevicePageWidget> {
                                           .labelSmall
                                           .fontStyle,
                                     ),
-                                    letterSpacing: 0.0,
-                                    fontWeight: FlutterFlowTheme.of(context)
-                                        .labelSmall
-                                        .fontWeight,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .labelSmall
-                                        .fontStyle,
-                                  ),
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                    Expanded(
-                      child: Align(
-                        alignment: AlignmentDirectional(1.0, 0.0),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 10.0, 0.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Expanded(
-                                child: Align(
-                                  alignment: AlignmentDirectional(1.0, 0.0),
-                                  child: FlutterFlowIconButton(
-                                    borderColor:
-                                        FlutterFlowTheme.of(context).alternate,
-                                    borderRadius: 20.0,
-                                    buttonSize: 45.0,
-                                    icon: Icon(
-                                      Icons.stop_circle_outlined,
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
-                                      size: 28.0,
-                                    ),
-                                    onPressed: () async {
-                                      await actions.disconnectDevice(
-                                        FFAppState().currentDevice,
-                                      );
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        SnackBar(
-                                          content: Text(
-                                            'Device Disconnected!',
-                                            style: TextStyle(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
+                      Expanded(
+                        child: Align(
+                          alignment: AlignmentDirectional(1.0, 0.0),
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 10.0, 0.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Expanded(
+                                  child: Align(
+                                    alignment: AlignmentDirectional(1.0, 0.0),
+                                    child: FlutterFlowIconButton(
+                                      borderColor: FlutterFlowTheme.of(context)
+                                          .alternate,
+                                      borderRadius: 20.0,
+                                      buttonSize: 45.0,
+                                      icon: Icon(
+                                        Icons.stop_circle_outlined,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        size: 28.0,
+                                      ),
+                                      onPressed: () async {
+                                        await actions.disconnectDevice(
+                                          FFAppState().currentDevice,
+                                        );
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              'Device Disconnected!',
+                                              style: TextStyle(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                              ),
                                             ),
+                                            duration:
+                                                Duration(milliseconds: 4000),
+                                            backgroundColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .alternate,
                                           ),
-                                          duration:
-                                              Duration(milliseconds: 4000),
-                                          backgroundColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .alternate,
-                                        ),
-                                      );
+                                        );
 
-                                      context
-                                          .pushNamed(HomePageWidget.routeName);
-                                    },
+                                        context.pushNamed(
+                                            HomePageWidget.routeName);
+                                      },
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 Text(
-                  'You can send data to the connected device and receive data back from it.',
-                  style: FlutterFlowTheme.of(context).labelMedium.override(
+                  'Calibration Command Reference',
+                  style: FlutterFlowTheme.of(context).bodyLarge.override(
                         font: GoogleFonts.roboto(
-                          fontWeight: FlutterFlowTheme.of(context)
-                              .labelMedium
-                              .fontWeight,
-                          fontStyle: FlutterFlowTheme.of(context)
-                              .labelMedium
-                              .fontStyle,
+                          fontWeight: FontWeight.w600,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).bodyLarge.fontStyle,
                         ),
                         letterSpacing: 0.0,
-                        fontWeight:
-                            FlutterFlowTheme.of(context).labelMedium.fontWeight,
+                        fontWeight: FontWeight.w600,
                         fontStyle:
-                            FlutterFlowTheme.of(context).labelMedium.fontStyle,
+                            FlutterFlowTheme.of(context).bodyLarge.fontStyle,
+                        lineHeight: 1.4,
+                      ),
+                ),
+                Text(
+                  '- “0%” calibrate to 0 % spinal bending\n- “100%” calibrate to 100 % spinal bending\n- “MAX” set the maximum tolerated spinal bending',
+                  style: FlutterFlowTheme.of(context).labelSmall.override(
+                        font: GoogleFonts.roboto(
+                          fontWeight: FontWeight.normal,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).labelSmall.fontStyle,
+                        ),
+                        letterSpacing: 0.0,
+                        fontWeight: FontWeight.normal,
+                        fontStyle:
+                            FlutterFlowTheme.of(context).labelSmall.fontStyle,
                         lineHeight: 1.4,
                       ),
                 ),
@@ -334,24 +350,24 @@ class _DevicePageWidgetState extends State<DevicePageWidget> {
                             autofocus: false,
                             obscureText: false,
                             decoration: InputDecoration(
-                              hintText: 'Enter data to send...',
+                              hintText: 'Enter the calibration command here...',
                               hintStyle: FlutterFlowTheme.of(context)
-                                  .labelLarge
+                                  .labelSmall
                                   .override(
                                     font: GoogleFonts.roboto(
                                       fontWeight: FlutterFlowTheme.of(context)
-                                          .labelLarge
+                                          .labelSmall
                                           .fontWeight,
                                       fontStyle: FlutterFlowTheme.of(context)
-                                          .labelLarge
+                                          .labelSmall
                                           .fontStyle,
                                     ),
                                     letterSpacing: 0.0,
                                     fontWeight: FlutterFlowTheme.of(context)
-                                        .labelLarge
+                                        .labelSmall
                                         .fontWeight,
                                     fontStyle: FlutterFlowTheme.of(context)
-                                        .labelLarge
+                                        .labelSmall
                                         .fontStyle,
                                   ),
                               enabledBorder: OutlineInputBorder(
@@ -474,22 +490,18 @@ class _DevicePageWidgetState extends State<DevicePageWidget> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Text(
-                        'Received Data:',
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                        'Received Data',
+                        style: FlutterFlowTheme.of(context).bodyLarge.override(
                               font: GoogleFonts.roboto(
-                                fontWeight: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .fontWeight,
+                                fontWeight: FontWeight.w600,
                                 fontStyle: FlutterFlowTheme.of(context)
-                                    .bodyMedium
+                                    .bodyLarge
                                     .fontStyle,
                               ),
                               letterSpacing: 0.0,
-                              fontWeight: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .fontWeight,
+                              fontWeight: FontWeight.w600,
                               fontStyle: FlutterFlowTheme.of(context)
-                                  .bodyMedium
+                                  .bodyLarge
                                   .fontStyle,
                             ),
                       ),
@@ -501,21 +513,21 @@ class _DevicePageWidgetState extends State<DevicePageWidget> {
                   children: [
                     Text(
                       FFAppState().receivedData,
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                      style: FlutterFlowTheme.of(context).labelSmall.override(
                             font: GoogleFonts.roboto(
                               fontWeight: FlutterFlowTheme.of(context)
-                                  .bodyMedium
+                                  .labelSmall
                                   .fontWeight,
                               fontStyle: FlutterFlowTheme.of(context)
-                                  .bodyMedium
+                                  .labelSmall
                                   .fontStyle,
                             ),
                             letterSpacing: 0.0,
                             fontWeight: FlutterFlowTheme.of(context)
-                                .bodyMedium
+                                .labelSmall
                                 .fontWeight,
                             fontStyle: FlutterFlowTheme.of(context)
-                                .bodyMedium
+                                .labelSmall
                                 .fontStyle,
                           ),
                     ),

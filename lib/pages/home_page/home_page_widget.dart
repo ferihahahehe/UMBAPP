@@ -194,21 +194,11 @@ class _HomePageWidgetState extends State<HomePageWidget>
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  if (FFAppState().isBluetoothEnabled)
-                    Expanded(
-                      child: Text(
-                        'Enable your device bluetooth to scan for nearby devices.',
-                        style: FlutterFlowTheme.of(context).bodyLarge.override(
-                              font: GoogleFonts.roboto(
-                                fontWeight: FlutterFlowTheme.of(context)
-                                    .bodyLarge
-                                    .fontWeight,
-                                fontStyle: FlutterFlowTheme.of(context)
-                                    .bodyLarge
-                                    .fontStyle,
-                              ),
-                              color: FlutterFlowTheme.of(context).secondaryText,
-                              letterSpacing: 0.0,
+                  Expanded(
+                    child: Text(
+                      'Enable your device bluetooth to scan for nearby devices.',
+                      style: FlutterFlowTheme.of(context).bodyLarge.override(
+                            font: GoogleFonts.roboto(
                               fontWeight: FlutterFlowTheme.of(context)
                                   .bodyLarge
                                   .fontWeight,
@@ -216,8 +206,17 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                   .bodyLarge
                                   .fontStyle,
                             ),
-                      ),
+                            color: FlutterFlowTheme.of(context).primaryText,
+                            letterSpacing: 0.0,
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .bodyLarge
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .bodyLarge
+                                .fontStyle,
+                          ),
                     ),
+                  ),
                   InkWell(
                     splashColor: Colors.transparent,
                     focusColor: Colors.transparent,
@@ -307,6 +306,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                         .bodyLarge
                                                                         .fontStyle,
                                                                   ),
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryText,
                                                                   letterSpacing:
                                                                       0.0,
                                                                   fontWeight:
@@ -481,6 +483,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                                         fontWeight: FlutterFlowTheme.of(context).bodyLarge.fontWeight,
                                                                                         fontStyle: FlutterFlowTheme.of(context).bodyLarge.fontStyle,
                                                                                       ),
+                                                                                      color: FlutterFlowTheme.of(context).primaryText,
                                                                                       letterSpacing: 0.0,
                                                                                       fontWeight: FlutterFlowTheme.of(context).bodyLarge.fontWeight,
                                                                                       fontStyle: FlutterFlowTheme.of(context).bodyLarge.fontStyle,
@@ -590,6 +593,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                       .bodyLarge
                                                                       .fontStyle,
                                                                 ),
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryText,
                                                                 letterSpacing:
                                                                     0.0,
                                                                 fontWeight:

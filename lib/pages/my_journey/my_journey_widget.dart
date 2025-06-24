@@ -217,7 +217,7 @@ class _MyJourneyWidgetState extends State<MyJourneyWidget> {
                                                     .fontStyle,
                                           ),
                                           color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
+                                              .primaryText,
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.w600,
                                           fontStyle:
@@ -248,6 +248,8 @@ class _MyJourneyWidgetState extends State<MyJourneyWidget> {
                                                   .bodyLarge
                                                   .fontStyle,
                                         ),
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
                                         letterSpacing: 0.0,
                                         fontWeight: FontWeight.w600,
                                         fontStyle: FlutterFlowTheme.of(context)
@@ -428,6 +430,8 @@ class _MyJourneyWidgetState extends State<MyJourneyWidget> {
                                                   .bodyLarge
                                                   .fontStyle,
                                         ),
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
                                         letterSpacing: 0.0,
                                         fontWeight: FontWeight.w600,
                                         fontStyle: FlutterFlowTheme.of(context)
@@ -607,6 +611,8 @@ class _MyJourneyWidgetState extends State<MyJourneyWidget> {
                                                   .bodyLarge
                                                   .fontStyle,
                                         ),
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
                                         letterSpacing: 0.0,
                                         fontWeight: FontWeight.w600,
                                         fontStyle: FlutterFlowTheme.of(context)
@@ -786,6 +792,8 @@ class _MyJourneyWidgetState extends State<MyJourneyWidget> {
                                                   .bodyLarge
                                                   .fontStyle,
                                         ),
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
                                         letterSpacing: 0.0,
                                         fontWeight: FontWeight.w600,
                                         fontStyle: FlutterFlowTheme.of(context)
@@ -965,6 +973,8 @@ class _MyJourneyWidgetState extends State<MyJourneyWidget> {
                                                   .bodyLarge
                                                   .fontStyle,
                                         ),
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
                                         letterSpacing: 0.0,
                                         fontWeight: FontWeight.w600,
                                         fontStyle: FlutterFlowTheme.of(context)
@@ -1144,6 +1154,8 @@ class _MyJourneyWidgetState extends State<MyJourneyWidget> {
                                                   .bodyLarge
                                                   .fontStyle,
                                         ),
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
                                         letterSpacing: 0.0,
                                         fontWeight: FontWeight.w600,
                                         fontStyle: FlutterFlowTheme.of(context)
@@ -1182,11 +1194,11 @@ class _MyJourneyWidgetState extends State<MyJourneyWidget> {
                                             BorderRadius.circular(8.0),
                                       ),
                                       child: Container(
-                                        width: double.infinity,
-                                        height: double.infinity,
+                                        width: 300.0,
+                                        height: 300.0,
                                         child: custom_widgets.DynamicPieChart(
-                                          width: double.infinity,
-                                          height: double.infinity,
+                                          width: 300.0,
+                                          height: 300.0,
                                           goodValue: _model
                                               .journeyData!.weeklyTotalGood,
                                           badValue: _model

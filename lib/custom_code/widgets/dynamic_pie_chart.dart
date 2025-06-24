@@ -9,8 +9,10 @@ import 'package:flutter/material.dart';
 // Begin custom widget code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-// Set your widget name, define your parameter, and then add the
-// boilerplate code using the green button on the right!
+/// Set your widget name, define your parameter, and then add the boilerplate
+/// code using the green button on the right!
+import 'package:fl_chart/fl_chart.dart';
+import 'dart:math';
 
 class DynamicPieChart extends StatefulWidget {
   const DynamicPieChart({
@@ -40,8 +42,18 @@ class _DynamicPieChartState extends State<DynamicPieChart> {
   @override
   Widget build(BuildContext context) {
     final totalValue = widget.goodValue + widget.badValue;
-    final goodPercentage =
-        totalValue > 0 ? (widget.goodValue / totalValue) * 100 : 0;
+
+    if (totalValue <= 0) {
+      return Container(
+        width: widget.width,
+        height: widget.height,
+        child: Center(
+            child:
+                Text('No Data', style: FlutterFlowTheme.of(context).bodySmall)),
+      );
+    }
+
+    final goodPercentage = (widget.goodValue / totalValue) * 100;
 
     return Container(
       width: widget.width,
@@ -50,14 +62,27 @@ class _DynamicPieChartState extends State<DynamicPieChart> {
         alignment: Alignment.center,
         children: [
           // Teks Persentase di Tengah
-          Text(
-            '${goodPercentage.toStringAsFixed(0)}%',
-            style: FlutterFlowTheme.of(context).displaySmall.override(
-                  fontFamily: 'Roboto',
-                  color:
-                      widget.goodColor ?? FlutterFlowTheme.of(context).success,
-                  fontWeight: FontWeight.bold,
-                ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                '${goodPercentage.toStringAsFixed(0)}%',
+                // --- PERUBAHAN UKURAN FONT TENGAH ---
+                style: FlutterFlowTheme.of(context).headlineSmall.override(
+                      fontFamily: 'Roboto',
+                      color: widget.goodColor ??
+                          FlutterFlowTheme.of(context).success,
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+              Text(
+                'Good',
+                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                      fontFamily: 'Roboto',
+                      color: FlutterFlowTheme.of(context).secondaryText,
+                    ),
+              ),
+            ],
           ),
           // Pie Chart
           PieChart(
@@ -77,8 +102,9 @@ class _DynamicPieChartState extends State<DynamicPieChart> {
                 },
               ),
               borderData: FlBorderData(show: false),
-              sectionsSpace: 2, // Jarak antar slice
-              centerSpaceRadius: 80, // Ukuran lubang donat
+              sectionsSpace: 2,
+              // --- PERUBAHAN UKURAN LUBANG DONAT ---
+              centerSpaceRadius: 45,
               sections: showingSections(),
             ),
           ),
@@ -90,38 +116,43 @@ class _DynamicPieChartState extends State<DynamicPieChart> {
   List<PieChartSectionData> showingSections() {
     return List.generate(2, (i) {
       final isTouched = i == touchedIndex;
-      // Efek "explode" jika disentuh atau untuk data "Bad"
-      final double radius = isTouched ? 110.0 : 100.0;
-      final double fontSize = isTouched ? 20.0 : 16.0;
+      // --- PERUBAHAN UKURAN RADIUS & FONT SLICE ---
+      final double radius = isTouched ? 60.0 : 55.0; // Ukuran utama dikecilkan
+      final double fontSize =
+          isTouched ? 12.0 : 10.0; // Font label slice dikecilkan
+
+      final total = widget.goodValue + widget.badValue;
+      final percentage =
+          (i == 0 ? widget.goodValue / total : widget.badValue / total) * 100;
+
+      // Hanya tampilkan title jika persentase lebih dari 5% agar tidak terlalu ramai
+      final title = percentage > 5 ? '${percentage.toStringAsFixed(0)}%' : '';
 
       switch (i) {
         case 0: // Good Data
           return PieChartSectionData(
             color: widget.goodColor ?? FlutterFlowTheme.of(context).success,
             value: widget.goodValue,
-            title:
-                '${(widget.goodValue / (widget.goodValue + widget.badValue) * 100).toStringAsFixed(0)}%',
+            title: title,
             radius: radius,
             titleStyle: TextStyle(
               fontSize: fontSize,
               fontWeight: FontWeight.bold,
-              color: Colors.white,
+              color: const Color(0xffffffff),
             ),
-            badgePositionPercentageOffset: .98,
           );
         case 1: // Bad Data
           return PieChartSectionData(
             color: widget.badColor ?? FlutterFlowTheme.of(context).error,
             value: widget.badValue,
-            title:
-                '${(widget.badValue / (widget.goodValue + widget.badValue) * 100).toStringAsFixed(0)}%',
-            radius: radius + 5, // Sedikit lebih besar untuk menonjol
+            title: title,
+            radius:
+                radius, // Radius disamakan agar tidak "meledak" secara default
             titleStyle: TextStyle(
               fontSize: fontSize,
               fontWeight: FontWeight.bold,
-              color: Colors.white,
+              color: const Color(0xffffffff),
             ),
-            badgePositionPercentageOffset: .98,
           );
         default:
           throw Error();
