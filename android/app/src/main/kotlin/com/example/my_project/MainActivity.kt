@@ -1,4 +1,4 @@
-package com.mercubuana.asclepius
+package com.mercubuana.ascleplus
 
 import io.flutter.embedding.android.FlutterActivity
 

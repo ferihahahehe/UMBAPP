@@ -8,14 +8,16 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-// Set your action name, define your arguments and return parameter,
-// and then add the boilerplate code using the green button on the right!
-import 'dart:async';
+import 'index.dart'; // Imports other custom actions
+
+// --- KODE YANG DIPERBAIKI ---
+import 'dart:async'; // Menggunakan ':' bukan '.'
+// --- AKHIR KODE YANG DIPERBAIKI ---
+
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import '/backend/schema/structs/index.dart'; // Impor struct Anda
 
 // Variabel statis untuk menyimpan subscription.
-// Ini akan tetap ada selama aplikasi berjalan.
 class BLESingleton {
   static StreamSubscription? _dataSubscription;
 
@@ -29,15 +31,10 @@ Future<void> manageDataListener(String action, BTDeviceStruct device) async {
   final bluetoothDevice = BluetoothDevice.fromId(device.id);
 
   if (action == 'start') {
-    // Hentikan listener sebelumnya jika ada
     await BLESingleton.dataSubscription?.cancel();
 
     try {
-      // ===== PERUBAHAN DI SINI =====
-      // Memberi jeda 500ms agar perangkat periferal stabil setelah koneksi.
-      // Ini adalah workaround umum untuk masalah di mana discoverServices() gagal.
       await Future.delayed(const Duration(milliseconds: 500));
-      // ============================
 
       final services = await bluetoothDevice.discoverServices();
       for (BluetoothService service in services) {
@@ -46,18 +43,34 @@ Future<void> manageDataListener(String action, BTDeviceStruct device) async {
           final isRead = characteristic.properties.read;
           final isNotify = characteristic.properties.notify;
 
-          // Cari characteristic yang bisa notify
           if (isRead && isNotify) {
             await characteristic.setNotifyValue(true);
             BLESingleton.dataSubscription =
                 characteristic.onValueReceived.listen((value) {
               final receivedString = String.fromCharCodes(value);
-              FFAppState().receivedData = receivedString;
 
-              // Panggil aksi baru untuk memproses batch data
-              processAndAggregateDataBatch(receivedString);
+              // Cek jika data yang diterima adalah respons dari command
+              if (receivedString.toLowerCase().contains('sukses') ||
+                  receivedString.toLowerCase().contains('gagal') ||
+                  receivedString.toLowerCase().contains('diterima')) {
+                final context = appNavigatorKey.currentContext;
+                if (context != null) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Pesan dari Perangkat: $receivedString'),
+                      duration: Duration(seconds: 3),
+                    ),
+                  );
+                }
+              }
+              // Jika ini adalah data telemetri biasa, proses seperti biasa
+              else if (receivedString.contains(';')) {
+                processAndAggregateDataBatch(receivedString);
+              }
+
+              // Selalu update state untuk ditampilkan di UI
+              FFAppState().receivedData = receivedString;
             });
-            // Hentikan setelah menemukan characteristic yang tepat
             return;
           }
         }

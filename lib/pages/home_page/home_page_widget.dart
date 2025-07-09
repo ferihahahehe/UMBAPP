@@ -129,7 +129,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                     Align(
                       alignment: AlignmentDirectional(0.0, 0.0),
                       child: Text(
-                        'ASCLEPIUS',
+                        'Ascle+',
                         textAlign: TextAlign.center,
                         style:
                             FlutterFlowTheme.of(context).displaySmall.override(
@@ -154,7 +154,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
               Align(
                 alignment: AlignmentDirectional(0.0, 0.0),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(80.0, 0.0, 0.0, 5.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 18.0, 5.0),
                   child: Text(
                     'by Feri M. Sibarani',
                     textAlign: TextAlign.center,
